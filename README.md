@@ -1,0 +1,2 @@
+# composite
+A Docker image 
