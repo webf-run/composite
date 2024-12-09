@@ -11,11 +11,17 @@ RUN apt install -y bash curl unzip supervisor qemu-user-static
 # Install MongoDB dependencies
 RUN apt install -y libcurl4 libgssapi-krb5-2 libldap-2.5-0 libwrap0 libsasl2-2 libsasl2-modules libsasl2-modules-gssapi-mit openssl liblzma5
 
+# Default data directory for MongoDB.
+RUN mkdir -p /data/db
+
 # Install Mise as a Runtime Version Manager
-RUN curl https://mise.jdx.dev/mise-latest-${TARGETOS}-${TARGETARCH} > /usr/bin/mise \
-  && chmod +x /usr/bin/mise \
+RUN curl https://mise.jdx.dev/mise-latest-${TARGETOS}-${TARGETARCH} > /usr/local/bin/mise \
+  && chmod +x /usr/local/bin/mise \
   && echo 'eval "$(mise activate bash --shims)"' >> ~/.bash_profile \
   && echo 'eval "$(mise activate bash --shims)"' >> ~/.bashrc
+
+# Hack to make Mise work with Docker for subsequent RUN commands
+ENV PATH="/root/.local/share/mise/shims:$PATH"
 
 WORKDIR /runtime
 
