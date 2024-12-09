@@ -14,7 +14,7 @@ RUN mkdir -p /data/db
 # Basic setup and core packages
 RUN apt update -y && apt upgrade -y
 RUN apt install -y bash curl unzip supervisor qemu-user-static
-RUN apt install -y git gzip xz-utils
+RUN apt install -y git gzip xz-utils make g++ build-essential
 
 # Install MongoDB dependencies
 RUN apt install -y libcurl4 libgssapi-krb5-2 libldap-2.5-0 libwrap0 libsasl2-2 libsasl2-modules libsasl2-modules-gssapi-mit openssl liblzma5
