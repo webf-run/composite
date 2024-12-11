@@ -38,4 +38,11 @@ RUN curl -o mongo.tgz https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-ubun
   && mv mongodb-linux-x86_64-ubuntu2204-6.0.18/bin/mongo* /usr/local/bin \
   && rm -rf mongo*
 
+# Install MongoDB Shell
+RUN curl -o mongo-shell.tgz https://downloads.mongodb.com/compass/mongosh-2.3.4-linux-x64.tgz \
+  && tar -xvzf mongo-shell.tgz \
+  && mv mongosh-2.3.4-linux-x64/bin/mongosh /usr/local/bin/ \
+  && mv mongosh-2.3.4-linux-x64/bin/mongosh_crypt_v1.so /usr/local/lib/ \
+  && rm -rf mongo*
+
 CMD ["/bin/sh", "-c", "bash"]
